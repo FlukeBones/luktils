@@ -4,3 +4,8 @@ Yes that's how you say it. It seemed like a good idea at the time.
 Or mine, for that matter.
 # scRNA-seq analysis, plotting, and dataviz.
 And it doesn't even do that particularly well.
+
+
+# Current Functions:
+// subToMain
+This is a quick function to move the active idents from an object subclustered new labels to a larger object by matching cell names.
