@@ -1,0 +1,10 @@
+Package: luktils
+Title: lukseful utils for scRNA-seq analysis
+Version: 0.1.9001
+Authors@R: 
+    person("Jones", "Luke Joseph", , "l.j.jones.3@bham.ac.uk", role = c("aut", "cre"))
+Description: Helpful Seurat-compatible functions for scRNA-seq processing, plotting and (hopefully) publishing.
+License: License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
