@@ -6,19 +6,29 @@
 #' @param features A list of features to plot
 #' @param group.by A metadata column by which to split your data
 #' @param assay The assay in the Seurat object to pull from
+#' @param cols A vector of colors for the clusters (uses Seurat default if NULL)
 #' @return A ggplot2 scaled data heatmap
 #' @export
 
+avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NULL, cols = NULL) {
+  temp_seu <- seurat_obj
+  temp_seu@meta.data$idents <- Idents(temp_seu)
 
-avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = assay) {
-  # Define default markers if none provided
+  # Define defaults
   if (is.null(features)) {
-    features <- c("CD3D", "CD4", "CD8A", "GZMB", "CD79A", "SDC1", "MS4A1", "CD68", "CLEC10A", "CLIC5", "PRG4", "PDPN", "THY1", "PECAM1", "CD34", "MKI67")  # Example immune markers; replace with your defaults
+    features <- c("CD3D", "CD4", "CD8A", "GZMB", "CD79A", "SDC1", "MS4A1", "CD68", "CLEC10A", "CLIC5", "PRG4", "PDPN", "THY1", "PECAM1", "CD34", "MKI67")
+  }
+  if (is.null(group.by)) {
+    group.by <- "idents"
+  }
+
+  if (is.null(assay)) {
+    group.by <- "RNA"
   }
 
   # Calculate average expression per group
-  avg_exp <- AggregateExpression(object = seurat_obj, assays = assay, features = features, group.by = group.by)
-  avg_exp <- avg_exp[[1]]
+  avg_exp <- AggregateExpression(object = temp_seu, assays = assay, features = features, group.by = group.by)
+  avg_exp <- as.matrix(avg_exp[[1]])
   avg_exp <- avg_exp[features, , drop = FALSE]
 
   # Scale for heatmap
@@ -29,12 +39,27 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = ass
   annotation_col <- data.frame(Cluster = colnames(avg_exp_scaled))
   rownames(annotation_col) <- colnames(avg_exp_scaled)
   ann_vals <- unique(annotation_col$Cluster)
+
+  # Generate or use provided colors
+  if (is.null(cols)) {
+    cols <- scales::hue_pal()(length(ann_vals))
+  } else if (length(cols) < length(ann_vals)) {
+    warning("Provided cols has fewer colors than clusters. Generating additional colors.")
+    additional <- scales::hue_pal()(length(ann_vals) - length(cols))
+    cols <- c(cols, additional)
+  } else if (length(cols) > length(ann_vals)) {
+    cols <- cols[1:length(ann_vals)]  # Trim excess
+  }
+
+  # Ensure names match exactly
   ann_colors <- list(
-    Cluster = setNames(
-      c(brewer.pal(length(annotation_col$Cluster), "Set3") ),
-      ann_vals
-    )
+    Cluster = setNames(cols, ann_vals)
   )
+
+  # Validate colors
+  if (!all(sapply(cols, function(x) is.character(x) && grepl("^#", x) || x %in% colors()))) {
+    stop("Invalid colors in cols. Must be hex codes or named colors.")
+  }
 
   # Plot heatmap
   p <<- pheatmap::pheatmap(
@@ -45,12 +70,12 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = ass
     show_colnames = TRUE,
     cluster_rows = F,
     cluster_cols = F,
-    fontsize = 25,
-    fontsize_row = 25,
+    fontsize = 12,
+    fontsize_row = 12,
     scale = "none",
     angle_col = 45,
-    cellwidth = 40,
-    cellheight = 30,
+    cellwidth = 20,
+    cellheight = 15,
     annotation_col = annotation_col,
     annotation_colors = ann_colors
   )

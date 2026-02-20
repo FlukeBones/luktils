@@ -21,7 +21,7 @@ lUMAP <- function(seurat_obj, cols = NULL){
 
   # If cols is not specified, generate defaults
   if (is.null(cols)) {
-    cols <- scales::hue_pal()(length(levels(Seurat::Idents(temp))))  # Cap at 24 colors
+    cols <- scales::hue_pal()(length(levels(Seurat::Idents(temp))))
   }
 
   umap$color_col <- umap$cluster

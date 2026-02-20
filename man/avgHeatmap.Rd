@@ -6,7 +6,13 @@
 Plots an averaged heatmap, different from the default Seurat DoHeatmap
 Usage: this will show the heatmap, use ggplot2 to save this out}
 \usage{
-avgHeatmap(seurat_obj, features = NULL, group.by = NULL, assay = assay)
+avgHeatmap(
+  seurat_obj,
+  features = NULL,
+  group.by = NULL,
+  assay = NULL,
+  cols = NULL
+)
 }
 \arguments{
 \item{seurat_obj}{A Seurat object to plot features for}
@@ -16,6 +22,8 @@ avgHeatmap(seurat_obj, features = NULL, group.by = NULL, assay = assay)
 \item{group.by}{A metadata column by which to split your data}
 
 \item{assay}{The assay in the Seurat object to pull from}
+
+\item{cols}{A vector of colors for the clusters (uses Seurat default if NULL)}
 }
 \value{
 A ggplot2 scaled data heatmap
