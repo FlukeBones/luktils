@@ -10,7 +10,7 @@
 # protanCols:
 protanCols <- function(panel = NULL){
   if(is.null(panel) || panel == "default" || panel == "0"){
-    list(
+    c(
       "olivedrab",
       "aquamarine2",
       "darkkhaki",
@@ -25,7 +25,7 @@ protanCols <- function(panel = NULL){
       "mediumorchid2"
   )} else
     if(panel == "1"){
-      list(
+      c(
         "darkorange",
         "orchid1",
         "violetred1",
@@ -35,7 +35,7 @@ protanCols <- function(panel = NULL){
         "gold4"
         )} else
     if(panel == "2"){
-      list(
+      c(
         "#5C2175",
         "#D123CE",
         "#9447D3",

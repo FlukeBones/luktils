@@ -5,6 +5,7 @@
 #' @param seurat_obj A Seurat object to plot UMAP
 #' @param cols A list of colours to pass to the UMAP, defaults to Seurat base colours if not specified
 #' @return A ggplot2 UMAP
+#' @import dplyr
 #' @export
 
 lUMAP <- function(seurat_obj, cols = NULL){
@@ -17,7 +18,7 @@ lUMAP <- function(seurat_obj, cols = NULL){
   # Calculate cluster centers
   centers <- umap %>%
     group_by(cluster) %>%
-    summarize(UMAP1 = mean(UMAP1), UMAP2 = mean(UMAP2))
+    dplyr::summarize(UMAP1 = mean(UMAP1), UMAP2 = mean(UMAP2))
 
   # If cols is not specified, generate defaults
   if (is.null(cols)) {
