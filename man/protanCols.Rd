@@ -2,17 +2,17 @@
 % Please edit documentation in R/protanCols.R
 \name{protanCols}
 \alias{protanCols}
-\title{protanCols
-Protanomaly is red-green colourblindness characterised by red-weak vision. This gives a panel of colours that are better than Seurat default for colourblind viz.
-Usage: cols <- protanCols assigns the colours to a new thing}
+\title{protanCols}
 \usage{
-protanCols()
+protanCols(panel = NULL)
+}
+\arguments{
+\item{panel}{Panel to return, one of NULL (blank) "default" or "0", "1" or "2"}
 }
 \value{
 A list of colours
 }
 \description{
-protanCols
 Protanomaly is red-green colourblindness characterised by red-weak vision. This gives a panel of colours that are better than Seurat default for colourblind viz.
 Usage: cols <- protanCols assigns the colours to a new thing
 }
