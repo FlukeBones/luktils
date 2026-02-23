@@ -42,7 +42,7 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
   # Calculate proportions
   plot_df <- temp_seu@meta.data %>%
     dplyr::group_by(.data[[meta.1]], .data[[meta.2]]) %>%
-    dplyr::summarise(n = n(), .groups = "drop") %>%
+    dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
     dplyr::group_by(.data[[meta.1]]) %>%
     dplyr::mutate(freq = n / sum(n)) %>%
     dplyr::ungroup()
