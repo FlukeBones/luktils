@@ -24,6 +24,9 @@ This makes 3 charts which show one metadata against another, both in raw numbers
 ### / [lUMAP](R/lUMAP.R) \\
 lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP graph but changes the plot size, point circling, larger legend, and plot boxed in.
 
+### / [LimPlot](R/LimPlot.R) \\
+LimPlot fixes Seurat's DimPlot, which by default requires you specify label = T, label.box = T, repel = T and +NoLegend(). LimPlot has all of these by default, saving literally 10s of seconds.
+
 ### / [protanCols](R/protanCols.R) \\
 Colourblind-friendly colours for plotting. Currently only 12 but more to be added.
 
