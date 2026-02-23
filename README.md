@@ -15,14 +15,14 @@ scRNA-seq analysis, plotting, and dataviz.
 ### / [subToMain](R/subToMain.R) \\
 This is a quick function to move the active idents from an object subclustered new labels to a larger object by matching cell names.
 
-### / avgHeatmap \\
+### / [avgHeatmap](R/avgHeatmap.R) \\
 This is a heatmap plotting that uses pheatmap and AggregateExpression to make averaged expression heatmaps per cluster, instead of the default DoHeatmap
 
-### / freqCharts \\
+### / [freqCharts](R/freqCharts.R) \\
 This makes 3 charts which show one metadata against another, both in raw numbers and in frequency (scaled from 0-1) to show, for example, abundance of clusters per experimental group.
 
-### / lUMAP \\
+### / [lUMAP](R/lUMAP.R) \\
 lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP graph but changes the plot size, point circling, larger legend, and plot boxed in.
 
-### / protanCols \\
+### / [protanCols](R/protanCols.R) \\
 Colourblind-friendly colours for plotting. Currently only 12 but more to be added.
