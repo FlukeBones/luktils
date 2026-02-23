@@ -49,6 +49,7 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
   # Plot 1: Basic dodged bars
   p <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge()) +
+    ggplot2::scale_fill_manual(values = rev(cols)) +  # Added for consistent colors
     ggplot2::theme_bw() +
     ggplot2::labs(x = meta.2, y = "Proportion", fill = meta.1) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
