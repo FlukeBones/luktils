@@ -12,7 +12,7 @@ scRNA-seq analysis, plotting, and dataviz.
 
 
 ## Current Functions:
-### / subToMain \\
+### / [subToMain](R/subToMain.R) \\
 This is a quick function to move the active idents from an object subclustered new labels to a larger object by matching cell names.
 
 ### / avgHeatmap \\
