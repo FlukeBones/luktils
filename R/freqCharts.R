@@ -7,7 +7,7 @@
 #' @param meta.2 Second column in the metadata frame to use for Y axis plotting, defaults to active idents column
 #' @param cols Colours to use to label meta.1
 #' @return 2 ggplot2 chart objects showing raw numbers and scaled numbers
-#' @importFrom dplyr %>%
+#' @import dplyr
 #' @export
 
 freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
@@ -48,10 +48,26 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
     dplyr::ungroup()
 
   # Plot 1: Basic dodged bars
+  #p <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
+  #  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge()) +
+  #  ggplot2::scale_fill_manual(values = rev(cols)) +  # Added for consistent colors
+  #  ggplot2::theme_bw() +
+  #  ggplot2::labs(x = meta.2, y = "Proportion", fill = meta.1) +
+  #  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
+
   p <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge()) +
-    ggplot2::scale_fill_manual(values = rev(cols)) +  # Added for consistent colors
+    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), color = "black") +  # Added black outlines
+    ggplot2::scale_fill_manual(values = rev(cols)) +
     ggplot2::theme_bw() +
+    ggplot2::theme(
+      panel.border = ggplot2::element_rect(colour = "black", fill = NA, size = 1.0),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_text(size = 12, colour = "black"),
+      axis.text.y = ggplot2::element_text(size = 12, colour = "black"),
+      legend.title = ggplot2::element_text(size = 14),
+      legend.text = ggplot2::element_text(size = 14)
+    ) +
     ggplot2::labs(x = meta.2, y = "Proportion", fill = meta.1) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
