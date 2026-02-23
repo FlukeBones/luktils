@@ -26,3 +26,9 @@ lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP g
 
 ### / [protanCols](R/protanCols.R) \\
 Colourblind-friendly colours for plotting. Currently only 12 but more to be added.
+
+### / [synPanel](R/synPanel.R) \\
+Helpful lists of common genes for clustering synovial scRNA-seq data
+
+### / [FindNeighbours](R/FindNeighbours.R) \\
+Fixes Seurat's "FindNeighbors", which is spelled incorrectly (masks Seurat::FindNeighbors but with British English Spelling)
