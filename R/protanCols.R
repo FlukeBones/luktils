@@ -11,10 +11,7 @@
 protanCols <- function(panel = NULL){
   if(is.null(panel) || panel == "default" || panel == "0"){
     c(
-      "olivedrab",
       "aquamarine2",
-      "darkkhaki",
-      "tan4",
       "hotpink4",
       "rosybrown1",
       "orchid2",
@@ -22,7 +19,10 @@ protanCols <- function(panel = NULL){
       "darkorange",
       "steelblue2",
       "indianred1",
-      "mediumorchid2"
+      "mediumorchid2",
+      "tan4",
+      "darkkhaki",
+      "olivedrab"
   )} else
     if(panel == "1"){
       c(

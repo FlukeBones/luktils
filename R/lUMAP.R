@@ -6,6 +6,7 @@
 #' @param cols A list of colours to pass to the UMAP, defaults to Seurat base colours if not specified
 #' @return A ggplot2 UMAP
 #' @import dplyr
+#' @import ggplot2
 #' @export
 
 lUMAP <- function(seurat_obj, cols = NULL){

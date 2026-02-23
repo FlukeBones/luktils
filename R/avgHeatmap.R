@@ -23,7 +23,7 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NUL
   }
 
   if (is.null(assay)) {
-    group.by <- "RNA"
+    assay <- "RNA"
   }
 
   # Calculate average expression per group
