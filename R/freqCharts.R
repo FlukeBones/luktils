@@ -7,6 +7,7 @@
 #' @param meta.2 Second column in the metadata frame to use for Y axis plotting, defaults to active idents column
 #' @param cols Colours to use to label meta.1
 #' @return 2 ggplot2 chart objects showing raw numbers and scaled numbers
+#' @importFrom dplyr %>%
 #' @export
 
 freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
