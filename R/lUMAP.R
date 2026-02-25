@@ -43,5 +43,6 @@ lUMAP <- function(seurat_obj, cols = NULL){
     ) +
     guides(fill = guide_legend(reverse = T, override.aes = list(shape = 22, size = 10)))+
     theme(legend.text = element_text(size = 14),legend.title = element_text(size = 14))
+  rm(temp)
   return(p)
 }
