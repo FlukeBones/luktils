@@ -9,7 +9,7 @@
 synPanel <- function(panel = NULL){
   if(is.null(panel)){
     #default panel:
-    list(
+    c(
     "CD3D",
     "CD4",
     "CD8A",
@@ -24,7 +24,7 @@ synPanel <- function(panel = NULL){
     "PECAM1"
     )} else
    if(panel == "fibroblast" | panel == "Fibroblast" | panel == "fib" | panel == "Fib"){
-     list(
+     c(
      "PDPN", #
      "THY1", # Sublining
      "PRG4", # Lining
@@ -40,7 +40,7 @@ synPanel <- function(panel = NULL){
      "NOTCH3" # Sublining F7 NOTCH3+
      )} else
   if(panel == "CD8" | panel == "eight" | panel == "eights" | panel == "CD8s"){
-    list(
+    c(
       "CD3D",
       "CD3E",
       "CD4",
@@ -66,7 +66,7 @@ synPanel <- function(panel = NULL){
       "STMN1"
     )} else
   if(panel == "CD4" | panel == "four" | panel == "fours" | panel == "CD4s"){
-    list(
+    c(
       "CD3D",
       "CD3E",
       "CD4",
@@ -94,7 +94,7 @@ synPanel <- function(panel = NULL){
       "KLF12"
     )} else
   if(panel == "endo" | panel == "endothelial" | panel == "Endo" | panel == "Endothelial"){
-    list(
+    c(
       "PECAM1",
       "SPARC",
       "COL4A1",
@@ -105,7 +105,7 @@ synPanel <- function(panel = NULL){
       "LYVE1"
     )} else
   if(panel == "B" | panel == "bcell" | panel == "BCell" | panel == "Bcell" | panel == "plasma" | panel == "Plasma"| panel == "plasma cell" | panel == "Plasma cell"){
-    list(
+    c(
       "CD79A",
       "MS4A1",
       "CD52",
@@ -124,7 +124,7 @@ synPanel <- function(panel = NULL){
       "IGHG1"
     )} else
   if(panel == "macrophage" | panel == "myeloid" | panel == "DC" | panel == "Macro" | panel == "Myeloid" | panel == "Mye" | panel == "Mono"){
-    list(
+    c(
       "CD68",
       "MERTK",
       "SELENOP",
@@ -162,6 +162,3 @@ synPanel <- function(panel = NULL){
       "GZMB"
     )}
 }
-
-feats <- synPanel("macrophage")
-head(feats)
