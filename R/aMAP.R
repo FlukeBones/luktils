@@ -5,7 +5,6 @@
 #' with customizable extension and text offset per cluster, and UMAP centre parameters.
 #'
 #' @param seurat_object A Seurat object containing UMAP reduction (Seurat::RunUMAP() must have already been run)
-#' @param reduction The reduction to use (default: "umap")
 #' @param a_centre_1 X-coordinate of the plot center (default: calculated from data)
 #' @param a_centre_2 Y-coordinate of the plot center (default: calculated from data)
 #' @param default_ext Default extension factor for all clusters (default: 2)
@@ -75,13 +74,9 @@
 #'
 #' @export
 
-aMAP <- function(seurat_object, reduction = NULL, a_centre_1 = NULL, a_centre_2 = NULL,
+aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
                  default_ext = NULL, per_exts = NULL, text_offset = NULL,
                  per_text_offsets = NULL, ...){
-  
-  if(is.null(reduction)){
-    reduction = "umap"
-  }
   
   if(is.null(default_ext)){
     default_ext = 2
