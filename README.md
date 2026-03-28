@@ -21,6 +21,9 @@ This is a heatmap plotting that uses pheatmap and AggregateExpression to make av
 ### / [freqCharts](R/freqCharts.R) \\
 This makes 3 charts which show one metadata against another, both in raw numbers and in frequency (scaled from 0-1) to show, for example, abundance of clusters per experimental group.
 
+### / [aMAP](R/aMAP.R) \\
+aMAP (Annotated MAP) builds on Seurat's DimPlot to instead draw lines to annotate clusters, resulting in a cleaner UMAP without overlayed cluster names.
+
 ### / [lUMAP](R/lUMAP.R) \\
 lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP graph but changes the plot size, point circling, larger legend, and plot boxed in.
 
