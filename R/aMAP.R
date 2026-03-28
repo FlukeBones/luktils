@@ -37,7 +37,7 @@
 #' # p1 <- aMAP(seurat_object = data, order = clus_order)
 #' # p1
 #'
-#' # EXAMPLE 2: Custom extension factors per cluster
+#' # EXAMPLE 2: Custom extension factors per cluster (Not all clusters have to be defined)
 #' # (Controls how far label lines extend from cluster centers)
 #' per_exts <- c(
 #'   "Macrophage" = 4,
@@ -59,7 +59,7 @@
 #' #            per_exts = per_exts)
 #' # p2
 #'
-#' # EXAMPLE 3: Full customization with text offsets
+#' # EXAMPLE 3: Full customization with text offsets (Not all clusters have to be defined)
 #' # (Controls distance from label line to text)
 #' text_offsets <- c(
 #'   "Macrophage" = 1.5,
@@ -108,7 +108,7 @@ aMAP <- function(seurat_object, reduction = NULL, a_centre_1 = NULL, a_centre_2 
   
   # Calculate centroids for each cluster
   formula <- as.formula(paste("cbind(umap_1, umap_2) ~", group_name))
-  centroids <- aggregate(formula, data = umap_data, FUN = mean)
+  centroids <- aggregate(formula, data = umap_data, FUN = median)
   names(centroids)[2:3] <- c("center_umap_1", "center_umap_2")
   
   # Calculate the overall center of all points
