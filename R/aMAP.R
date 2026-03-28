@@ -86,7 +86,7 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
     text_offset = 0.5
   }
   
-  p <- DimPlot(..., object = seurat_object, reduction = reduction, label = F,
+  p <- DimPlot(..., object = seurat_object, label = F,
                label.box = F, raster = F, repel = F) + NoLegend() + ggtitle("") +
     NoAxes() + theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 1))
   
