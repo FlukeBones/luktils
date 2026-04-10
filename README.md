@@ -73,10 +73,10 @@ The following plot can be made by running:
 LimPlot fixes Seurat's DimPlot, which by default requires you specify label = T, label.box = T, repel = T and +NoLegend(). LimPlot has all of these by default, saving literally 10s of seconds.
 
 ### / [protanCols](R/protanCols.R) \\
-Colourblind-friendly colours for plotting. Currently only 12 but more to be added.
+Colourblind-friendly colours for plotting. Currently only 3 panels but more to be added. (Panel 2 was used in the included examplar figures).
 
 ### / [synPanel](R/synPanel.R) \\
-Helpful lists of common genes for clustering synovial scRNA-seq data
+Helpful lists of common genes for clustering synovial scRNA-seq data. 
 
 ### / [FindNeighbours](R/FindNeighbours.R) \\
 Fixes Seurat's "FindNeighbors", which is spelled incorrectly (masks Seurat::FindNeighbors but with British English Spelling)
