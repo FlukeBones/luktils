@@ -2,6 +2,7 @@
 
 export(FindNeighbours)
 export(LimPlot)
+export(LotPlot)
 export(aMAP)
 export(avgHeatmap)
 export(freqCharts)
