@@ -56,7 +56,7 @@ The following plot can be made by running:
 
 ![luktils::lUMAP](images/lUMAP.png)
 
-### / [SlotPlot](NotUploadedYet) \\
+### / [SlotPlot](R/LotPlot.R) \\
 Edited Seurat::DotPlot to split the plot into groups of genes for better visual clarity.
 
 The following plot can be made by running:
