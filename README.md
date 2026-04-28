@@ -24,7 +24,7 @@ This is a heatmap plotting that uses pheatmap and AggregateExpression to make av
 The following plot can be made by running:
 > p <- avgHeatmap(data, features = synPanel("eight"), cols = protanCols(2))
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/avgHeatmap.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/avgHeatmap.png" height = "400">
 
 ### / [freqCharts](R/freqCharts.R) \\
 This makes 3 charts which show one metadata against another, both in raw numbers and in frequency (scaled from 0-1) to show, for example, abundance of clusters per experimental group.
@@ -32,12 +32,12 @@ This makes 3 charts which show one metadata against another, both in raw numbers
 The following plot can be made by running:
 > p <- freqCharts(data, cols = rev(protanCols(2)))
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/freqCharts_full.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/freqCharts_full.png" height = "400">
 
 and you can zoom on a single aspect of the 3 charts by running (for example to select the second one)
 > p[[2]]
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/freqCharts_2.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/freqCharts_2.png" height = "400">
 
 ### / [aMAP](R/aMAP.R) \\
 aMAP (Annotated UMAP) builds on Seurat's DimPlot to instead draw lines to annotate clusters, resulting in a cleaner UMAP without overlayed cluster names.
@@ -49,7 +49,7 @@ The following plot can be made by running: (noting that your extensions and text
                                "Cluster 3" = 1.5,
                                "Cluster 4" = 1), cols = protanCols(2)) + ggtitle("aMAP with protanCols colour panel")
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/aMAP_protan.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/aMAP_protan.png" height = "400">
 
 ### / [lUMAP](R/lUMAP.R) \\
 lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP graph but changes the plot size, point circling, larger legend, and plot boxed in.
@@ -57,7 +57,7 @@ lUMAP (El-UMAP or Loo-MAP, as in "Luke UMAP") uses a previously generated UMAP g
 The following plot can be made by running:
 > p <- luktils::lUMAP(data, cols = protanCols(2)) + ggtitle("lUMAP with protanCols colour panel")
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/lUMAP.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/lUMAP.png" height = "400">
 
 ### / [SlotPlot](R/LotPlot.R) \\
 Edited Seurat::DotPlot to split the plot into groups of genes for better visual clarity.
@@ -70,7 +70,7 @@ The following plot can be made by running:
                                        "Group 5" = 22:length(synPanel("eight"))),
               features = c(synPanel("eight"))) + ggtitle("SlotPlot with synPanel 'eight'")
 
-<img src ="https://github.com/FlukeBones/luktils/blob/main/images/SlotPlot.png" width = "400">
+<img src ="https://github.com/FlukeBones/luktils/blob/main/images/SlotPlot.png" height = "400">
 
 ### / [LimPlot](R/LimPlot.R) \\
 LimPlot fixes Seurat's DimPlot, which by default requires you specify label = T, label.box = T, repel = T and +NoLegend(). LimPlot has all of these by default, saving literally 10s of seconds.
