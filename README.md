@@ -1,4 +1,4 @@
-## luktils (luke-tils, like Luke Utils) is a package made to make my life easier.
+## luktils (luke-tils, like Luke Utils) is a package made to make my life easier.![luktils](images/sticker.png)
 
 <sub><sup>Yes that's how you say it. It seemed like a good idea at the time.</sub></sup>
 
