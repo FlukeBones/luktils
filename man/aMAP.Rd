@@ -3,23 +3,8 @@
 \name{aMAP}
 \alias{aMAP}
 \title{aMAP}
-\usage{
-aMAP(
-  seurat_object,
-  reduction = NULL,
-  a_centre_1 = NULL,
-  a_centre_2 = NULL,
-  default_ext = NULL,
-  per_exts = NULL,
-  text_offset = NULL,
-  per_text_offsets = NULL,
-  ...
-)
-}
 \arguments{
 \item{seurat_object}{A Seurat object containing UMAP reduction (Seurat::RunUMAP() must have already been run)}
-
-\item{reduction}{The reduction to use (default: "umap")}
 
 \item{a_centre_1}{X-coordinate of the plot center (default: calculated from data)}
 
@@ -64,7 +49,7 @@ clus_order <- rev(c(
 # p1 <- aMAP(seurat_object = data, order = clus_order)
 # p1
 
-# EXAMPLE 2: Custom extension factors per cluster
+# EXAMPLE 2: Custom extension factors per cluster (Not all clusters have to be defined)
 # (Controls how far label lines extend from cluster centers)
 per_exts <- c(
   "Macrophage" = 4,
@@ -86,7 +71,7 @@ per_exts <- c(
 #            per_exts = per_exts)
 # p2
 
-# EXAMPLE 3: Full customization with text offsets
+# EXAMPLE 3: Full customization with text offsets (Not all clusters have to be defined)
 # (Controls distance from label line to text)
 text_offsets <- c(
   "Macrophage" = 1.5,

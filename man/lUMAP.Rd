@@ -2,9 +2,7 @@
 % Please edit documentation in R/lUMAP.R
 \name{lUMAP}
 \alias{lUMAP}
-\title{lUMAP
-Different plotting for a UMAP, with points with an outline because it looks better
-Usage: Makes UMAP which can be displayed by calling p, or saved with ggplot2}
+\title{lUMAP}
 \usage{
 lUMAP(seurat_obj, cols = NULL)
 }
@@ -17,7 +15,5 @@ lUMAP(seurat_obj, cols = NULL)
 A ggplot2 UMAP
 }
 \description{
-lUMAP
-Different plotting for a UMAP, with points with an outline because it looks better
-Usage: Makes UMAP which can be displayed by calling p, or saved with ggplot2
+Different plotting for a UMAP, with points with an outlin because it looks better for low #s of cells.
 }

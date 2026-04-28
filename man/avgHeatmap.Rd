@@ -2,17 +2,9 @@
 % Please edit documentation in R/avgHeatmap.R
 \name{avgHeatmap}
 \alias{avgHeatmap}
-\title{avgHeatmap
-Plots an averaged heatmap, different from the default Seurat DoHeatmap
-Usage: this will show the heatmap, use ggplot2 to save this out}
+\title{avgHeatmap}
 \usage{
-avgHeatmap(
-  seurat_obj,
-  features = NULL,
-  group.by = NULL,
-  assay = NULL,
-  cols = NULL
-)
+avgHeatmap(seurat_obj,features = NULL,group.by = NULL,assay = NULL,cols = NULL)
 }
 \arguments{
 \item{seurat_obj}{A Seurat object to plot features for}
@@ -29,7 +21,5 @@ avgHeatmap(
 A ggplot2 scaled data heatmap
 }
 \description{
-avgHeatmap
 Plots an averaged heatmap, different from the default Seurat DoHeatmap
-Usage: this will show the heatmap, use ggplot2 to save this out
 }

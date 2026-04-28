@@ -1,6 +1,9 @@
-#' avgHeatmap
-#' Plots an averaged heatmap, different from the default Seurat DoHeatmap
-#' Usage: this will show the heatmap, use ggplot2 to save this out
+#' @name avgHeatmap
+#' @title avgHeatmap
+#'
+#' @description Plots an averaged heatmap, different from the default Seurat DoHeatmap
+#'
+#' @usage avgHeatmap(seurat_obj,features = NULL,group.by = NULL,assay = NULL,cols = NULL)
 #'
 #' @param seurat_obj A Seurat object to plot features for
 #' @param features A list of features to plot
@@ -10,9 +13,11 @@
 #' @return A ggplot2 scaled data heatmap
 #' @export
 
+utils::globalVariables(c("colors", "p"))
+
 avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NULL, cols = NULL) {
   temp_seu <- seurat_obj
-  temp_seu@meta.data$idents <- Idents(temp_seu)
+  temp_seu@meta.data$idents <- Seurat::Idents(temp_seu)
 
   # Define defaults
   if (is.null(features)) {
@@ -27,7 +32,7 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NUL
   }
 
   # Calculate average expression per group
-  avg_exp <- AggregateExpression(object = temp_seu, assays = assay, features = features, group.by = group.by)
+  avg_exp <- Seurat::AggregateExpression(object = temp_seu, assays = assay, features = features, group.by = group.by)
   avg_exp <- as.matrix(avg_exp[[1]])
   avg_exp <- avg_exp[features, , drop = FALSE]
 
@@ -53,7 +58,7 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NUL
 
   # Ensure names match exactly
   ann_colors <- list(
-    Cluster = setNames(cols, ann_vals)
+    Cluster = stats::setNames(cols, ann_vals)
   )
 
   # Validate colors
@@ -62,10 +67,10 @@ avgHeatmap <- function(seurat_obj, features = NULL, group.by = NULL, assay = NUL
   }
 
   # Plot heatmap
-  p <<- pheatmap::pheatmap(
+  p <- pheatmap::pheatmap(
     avg_exp_scaled,
     border_color = NA,
-    color = colorRampPalette(c("#FE11FF","#0B0801","#FFF957"))(8),
+    color = grDevices::colorRampPalette(c("#FE11FF","#0B0801","#FFF957"))(8),
     show_rownames = TRUE,
     show_colnames = TRUE,
     cluster_rows = F,

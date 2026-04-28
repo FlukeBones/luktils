@@ -1,6 +1,10 @@
-#' lUMAP
-#' Different plotting for a UMAP, with points with an outline because it looks better
-#' Usage: Makes UMAP which can be displayed by calling p, or saved with ggplot2
+#' @name lUMAP
+#' @title lUMAP
+#'
+#' @description
+#' Different plotting for a UMAP, with points with an outlin because it looks better for low #s of cells.
+#'
+#' @usage lUMAP(seurat_obj, cols = NULL)
 #'
 #' @param seurat_obj A Seurat object to plot UMAP
 #' @param cols A list of colours to pass to the UMAP, defaults to Seurat base colours if not specified
@@ -9,11 +13,13 @@
 #' @import ggplot2
 #' @export
 
+utils::globalVariables(c("cluster", "UMAP1", "UMAP2", "p", "color_col"))
+
 lUMAP <- function(seurat_obj, cols = NULL){
   temp <- seurat_obj
-  temp@meta.data$clusters <- Idents(temp)
+  temp@meta.data$clusters <- Seurat::Idents(temp)
 
-  umap <- data.frame(rownames(temp@meta.data),Embeddings(temp, reduction = "umap")[,1], Embeddings(temp, reduction = "umap")[,2],
+  umap <- data.frame(rownames(temp@meta.data), Seurat::Embeddings(temp, reduction = "umap")[,1], Seurat::Embeddings(temp, reduction = "umap")[,2],
                      temp$clusters)
   colnames(umap) <- c("ID","UMAP1", "UMAP2", "cluster")
   # Calculate cluster centers
@@ -29,7 +35,7 @@ lUMAP <- function(seurat_obj, cols = NULL){
   umap$color_col <- umap$cluster
 
   # Plot
-  p <<- ggplot(umap, aes(x=UMAP1, y=UMAP2)) +
+  p <- ggplot(umap, aes(x=UMAP1, y=UMAP2)) +
     geom_point(aes(fill=factor(color_col)), color="black", size=2.5, shape=21, stroke=0.2) +
     scale_fill_manual(
       name = NULL,

@@ -1,6 +1,7 @@
-#' aMAP
+#' @title aMAP
+#' @name aMAP
 #'
-#' Creates an annotated UMAP plot with extended labels pointing to cluster centers.
+#' @description Creates an annotated UMAP plot with extended labels pointing to cluster centers.
 #' This function adds lines and text labels extending from cluster centroids to white space, originating from the centre of the plot,
 #' with customizable extension and text offset per cluster, and UMAP centre parameters.
 #'
@@ -74,38 +75,40 @@
 #'
 #' @export
 
+utils::globalVariables(c("median", "center_umap_1", "center_umap_2", "label_umap_1", "label_umap_2", "text_umap_1", "text_umap_2"))
+
 aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
                  default_ext = NULL, per_exts = NULL, text_offset = NULL,
                  per_text_offsets = NULL, ...){
-  
+
   if(is.null(default_ext)){
     default_ext = 2
   }
-  
+
   if(is.null(text_offset)){
     text_offset = 0.5
   }
-  
-  p <- DimPlot(..., object = seurat_object, label = F,
-               label.box = F, raster = F, repel = F) + NoLegend() + ggtitle("") +
-    NoAxes() + theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 1))
-  
+
+  p <- Seurat::DimPlot(..., object = seurat_object, label = F,
+               label.box = F, raster = F, repel = F) + Seurat::NoLegend() + ggtitle("") +
+    Seurat::NoAxes() + theme(panel.border = element_rect(color = "black", fill = NA, linewidth = 1))
+
   # Extract the data from the plot
   umap_data <- p$data
-  
+
   # Rename in case using a different key for the reduction
   names(umap_data)[1:2] <- c("umap_1", "umap_2")
   umap_data$umap_1 <- as.numeric(umap_data$umap_1)
   umap_data$umap_2 <- as.numeric(umap_data$umap_2)
-  
+
   # Extract the grouping column name automatically
   group_name <- colnames(umap_data)[3]
-  
+
   # Calculate centroids for each cluster
-  formula <- as.formula(paste("cbind(umap_1, umap_2) ~", group_name))
-  centroids <- aggregate(formula, data = umap_data, FUN = median)
+  formula <- stats::as.formula(paste("cbind(umap_1, umap_2) ~", group_name))
+  centroids <- stats::aggregate(formula, data = umap_data, FUN = median)
   names(centroids)[2:3] <- c("center_umap_1", "center_umap_2")
-  
+
   # Calculate the overall center of all points
   if(is.null(a_centre_1) | is.null(a_centre_2)){
     overall_center <- colMeans(umap_data[, c("umap_1", "umap_2")])
@@ -114,29 +117,29 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
   } else {
     overall_center <- c(umap_1 = a_centre_1, umap_2 = a_centre_2)
   }
-  
+
   # Calculate direction vectors from overall center to each centroid
   centroids$dir_umap_1 <- centroids$center_umap_1 - overall_center["umap_1"]
   centroids$dir_umap_2 <- centroids$center_umap_2 - overall_center["umap_2"]
-  
+
   # Normalize the direction vectors
   dir_length <- sqrt(centroids$dir_umap_1^2 + centroids$dir_umap_2^2)
-  
+
   # Handle cases where dir_length is 0 (centroid at overall_center)
   if (any(dir_length == 0)) {
     centroids$dir_umap_1[dir_length == 0] <- 1
     centroids$dir_umap_2[dir_length == 0] <- 0
     dir_length[dir_length == 0] <- 1
   }
-  
+
   # Normalize direction vectors
   centroids$dir_umap_1 <- centroids$dir_umap_1 / dir_length
   centroids$dir_umap_2 <- centroids$dir_umap_2 / dir_length
-  
+
   # Assign extension factors per cluster
   extension_factors <- per_exts
   centroids[[group_name]] <- as.character(centroids[[group_name]])
-  
+
   if (is.null(extension_factors)) {
     print('Using default extension factor. Specify "per_exts" for per-cluster values.')
     centroids$extension_factor <- default_ext
@@ -145,11 +148,11 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
                                          extension_factors[centroids[, group_name]],
                                          default_ext)
   }
-  
+
   # Calculate label positions
   centroids$label_umap_1 <- centroids$center_umap_1 + centroids$dir_umap_1 * centroids$extension_factor
   centroids$label_umap_2 <- centroids$center_umap_2 + centroids$dir_umap_2 * centroids$extension_factor
-  
+
   # Assign text offsets per cluster
   if (is.null(per_text_offsets)) {
     print('Using default text offset. Specify "per_text_offsets" for per-cluster values.')
@@ -159,17 +162,17 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
                                     per_text_offsets[centroids[, group_name]],
                                     text_offset)
   }
-  
+
   # Calculate final text positions
   centroids$text_umap_1 <- centroids$label_umap_1 + centroids$dir_umap_1 * centroids$text_offset
   centroids$text_umap_2 <- centroids$label_umap_2 + centroids$dir_umap_2 * centroids$text_offset
-  
+
   # Calculate plot limits to include all labels
   x_min <- min(c(p$data$umap_1, centroids$text_umap_1), na.rm = TRUE) - 1
   x_max <- max(c(p$data$umap_1, centroids$text_umap_1), na.rm = TRUE) + 1
   y_min <- min(c(p$data$umap_2, centroids$text_umap_2), na.rm = TRUE) - 1
   y_max <- max(c(p$data$umap_2, centroids$text_umap_2), na.rm = TRUE) + 1
-  
+
   # Update plot with expanded limits and add annotations
   p <- p + xlim(x_min, x_max) + ylim(y_min, y_max) +
     geom_segment(data = centroids,
@@ -179,7 +182,7 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
     geom_text(data = centroids,
               aes(x = text_umap_1, y = text_umap_2, label = !!sym(group_name)),
               color = "black", size = 5.5, fontface = 1)
-  
+
   return(p)
 }
 

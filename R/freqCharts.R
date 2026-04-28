@@ -1,6 +1,10 @@
-#' freqCharts
-#' Plot charts of any metadata column in a Seurat object on a barchart, both by raw numbers and by frequency (1 normalised)
-#' Usage: freqCharts(seurat_obj, meta.1 = group, meta.2 = ident) to show split by ident per grouping, meta.1 will be X axis, meta.2 will be Y
+#' @name freqCharts
+#' @title freqCharts
+#'
+#' @description
+#' Plots charts of any 2 metadata columns in a Seurat object on 3 different barcharts, split by raw numbers and frequency.
+#'
+#' @usage freqCharts(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL)
 #'
 #' @param seurat_obj A Seurat object to plot abundance charts for
 #' @param meta.1 First column in the metadata frame to use for X axis plotting, defaults to group column
@@ -9,6 +13,8 @@
 #' @return 2 ggplot2 chart objects showing raw numbers and scaled numbers
 #' @import dplyr
 #' @export
+
+utils::globalVariables(c("p", "freq", "p1", "p2"))
 
 freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
   temp_seu <- seurat_obj
@@ -48,14 +54,14 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
     dplyr::ungroup()
 
   # Plot 1: Basic dodged bars
-  #p <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
+  #p <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
   #  ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge()) +
   #  ggplot2::scale_fill_manual(values = rev(cols)) +  # Added for consistent colors
   #  ggplot2::theme_bw() +
   #  ggplot2::labs(x = meta.2, y = "Proportion", fill = meta.1) +
   #  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-  p <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
+  p <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), color = "black") +  # Added black outlines
     ggplot2::scale_fill_manual(values = rev(cols)) +
     ggplot2::theme_bw() +
@@ -72,7 +78,7 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
   # Plot 2: Frequency with outlines
-  p1 <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
+  p1 <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = freq, fill = .data[[meta.2]])) +
     ggplot2::geom_col(color = "black") +
     ggplot2::scale_fill_manual(values = rev(cols)) +
     ggplot2::theme_bw() +
@@ -90,7 +96,7 @@ freqCharts <- function(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL) {
 
   # Plot 3: Absolute numbers
   options(scipen = 999)
-  p2 <<- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = n, fill = .data[[meta.2]])) +
+  p2 <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data[[meta.1]], y = n, fill = .data[[meta.2]])) +
     ggplot2::geom_col(color = "black") +
     ggplot2::scale_fill_manual(values = rev(cols)) +
     ggplot2::theme_bw() +

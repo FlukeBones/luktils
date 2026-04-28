@@ -8,5 +8,5 @@
 #'
 
 LimPlot <- function(...){
-  Seurat::DimPlot(..., label = T,  label.box = T, repel = T) + NoLegend()
+  Seurat::DimPlot(..., label = T,  label.box = T, repel = T) + Seurat::NoLegend()
 }

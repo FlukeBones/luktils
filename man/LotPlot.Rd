@@ -3,15 +3,18 @@
 \name{LotPlot}
 \alias{LotPlot}
 \title{LotPlot}
-\usage{
-LotPlot(seurat_object, gene_groups = NULL, group_size = 5, ...)
-}
 \arguments{
 \item{seurat_object}{A Seurat object}
 
 \item{gene_groups}{Groups of genes to box together on the DotPlot, defaults to groups of 5 if not specified}
 
 \item{group_size}{Number of genes per group when gene_groups is not specified. Defaults to 5.}
+
+\item{hi_col}{An R-compatible colour to use for the lowest expressed features. Defaults to "white".}
+
+\item{mid_col}{An R-compatible colour to use for the middest expressed features (for scaled data, this will be the 0 colour). Defaults to "lightsteelblue1".}
+
+\item{lo_col}{An R-compatible colour to use for the highest expressed features. Defaults to "midnightblue".}
 
 \item{...}{Additional parameters passed to Seurat::DotPlot() (All default Seurat::DotPlot() options are possible, including group.by, split.by, order, cols, pt.size)}
 }
@@ -20,9 +23,9 @@ A ggplot2 object with a split up DotPlot
 }
 \description{
 Creates a split up Dot plot for better visual clarity.
-This function adds to Seurat's DotPlot by breaking genes into groups as specified by user.
 }
 \examples{
+\dontrun{
 # EXAMPLE 1: Custom groupings format
 # You can set the groups by giving numbers directly
 # (Controls groups and the names given to those groups)
@@ -31,12 +34,12 @@ gene_groups <- list(
   "Communication" = 11:14,
   "Memory" = 15:20)
 # Usage:
-# p <- LotPlot(seurat_object = data,
+# p <- LotPlot(seurat_object,
 #            gene_groups = gene_groups)
 # p
 
 # EXAMPLE 2: Custom groupings format
-# You can also use the length() and unlist() to convert a list of concatenated characters automatically:
+# You can also use the length() and unlist() to convert a list of concatenated characters:
 list_1 <- c("Gene_1", "Gene_2", "Gene_3")
 list_2 <- c("Gene_4", "Gene_5", "Gene_6", "Gene_7")
 list_3 <- c("Gene_8", "Gene_9", "Gene_10", "Gene_11")
@@ -44,7 +47,7 @@ gene_groups <- list("Proliferating" = 1:length(list_1),
                    "Communication" = length(list_1)+1:length(list_2),
                    "Memory" = length(list_1)+length(list_2)+1:length(list_3))
 # Usage:
-p <- LotPlot(data, features = unlist(c(list_1, list_2, list_3)), gene_groups = gene_groups)
+p <- LotPlot(seurat_object, features = unlist(c(list_1, list_2, list_3)), gene_groups)
 p
-
+}
 }

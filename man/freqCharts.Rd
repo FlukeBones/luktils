@@ -2,9 +2,7 @@
 % Please edit documentation in R/freqCharts.R
 \name{freqCharts}
 \alias{freqCharts}
-\title{freqCharts
-Plot charts of any metadata column in a Seurat object on a barchart, both by raw numbers and by frequency (1 normalised)
-Usage: freqCharts(seurat_obj, meta.1 = group, meta.2 = ident) to show split by ident per grouping, meta.1 will be X axis, meta.2 will be Y}
+\title{freqCharts}
 \usage{
 freqCharts(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL)
 }
@@ -21,7 +19,5 @@ freqCharts(seurat_obj, meta.1 = NULL, meta.2 = NULL, cols = NULL)
 2 ggplot2 chart objects showing raw numbers and scaled numbers
 }
 \description{
-freqCharts
-Plot charts of any metadata column in a Seurat object on a barchart, both by raw numbers and by frequency (1 normalised)
-Usage: freqCharts(seurat_obj, meta.1 = group, meta.2 = ident) to show split by ident per grouping, meta.1 will be X axis, meta.2 will be Y
+Plots charts of any 2 metadata columns in a Seurat object on 3 different barcharts, split by raw numbers and frequency.
 }
