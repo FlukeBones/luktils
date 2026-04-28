@@ -15,6 +15,9 @@ scRNA-seq analysis, plotting, and dataviz.
 ### / [subToMain](R/subToMain.R) \\
 This is a quick function to move the active idents from an object subclustered new labels to a larger object by matching cell names.
 
+### / [topX](R/topX.R) \\
+A short function to get the top log2FC X genes per cluster from a FindAllMarkers readout, for example, to help plotting of marker genes.
+
 ### / [avgHeatmap](R/avgHeatmap.R) \\
 This is a heatmap plotting that uses pheatmap and AggregateExpression to make averaged expression heatmaps per cluster, instead of the default DoHeatmap which has each cell plotted as it's own line. This uses the same heatmap colours as default Seurat plotting for clarity, colours specify the clustering bar along the top of the heatmap.
 
