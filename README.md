@@ -1,9 +1,9 @@
-## luktils (luke-tils, like Luke Utils) is a package made to make my life easier. <img src ="https://github.com/FlukeBones/luktils/blob/main/images/sticker.png" width = "200" align="right">
+## luktils (luke-tils, like Luke Utils) is a package made to make my life easier. 
 <sub><sup>Yes that's how you say it. It seemed like a good idea at the time.</sub></sup>
 
 There's no guarantee it'll make your life easier.
 
-<sub><sup>Or mine, for that matter.</sub></sup>
+<sub><sup>Or mine, for that matter.</sub></sup> <img src ="https://github.com/FlukeBones/luktils/blob/main/images/sticker.png" width = "200" align="right">
 
 scRNA-seq analysis, plotting, and dataviz.
 
