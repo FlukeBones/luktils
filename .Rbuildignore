@@ -1,3 +1,6 @@
 ^luktils\.Rproj$
 ^\.Rproj\.user$
 ^images/
+^_pkgdown\.yml$
+^\.\./pkgdown_out$
+^pkgdown$

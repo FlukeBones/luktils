@@ -4,7 +4,7 @@
 \alias{topX}
 \title{A simple solution to grab top X genes per cluster from a FindAllMarkers readout.}
 \usage{
-topX(res, n_genes = 5, pct_cut = 0.1, p_cut = 0.05)
+topX(res, n_genes = 5, pct_cut = 0.1, p_cut = 0.05, cut_by = "pct.1", neg = F)
 }
 \arguments{
 \item{res}{The FindAllMarkers readout that you want to select from.}
@@ -13,7 +13,11 @@ topX(res, n_genes = 5, pct_cut = 0.1, p_cut = 0.05)
 
 \item{pct_cut}{Minimum percent expression cutoff. Default is 0.1 (10\%).}
 
+\item{cut_by}{A column in the results dataframe by which to cut. Default is pct.1.}
+
 \item{p_cut}{Adjusted p-value cutoff. Default is 0.05.}
+
+\item{neg}{Binary which determines whether you want negative markers. Default is False.}
 }
 \value{
 A tibble of top X genes for each cluster in your readout
