@@ -6,8 +6,10 @@
 #' with customizable extension and text offset per cluster, and UMAP centre parameters.
 #'
 #' @param seurat_object A Seurat object containing UMAP reduction (Seurat::RunUMAP() must have already been run)
-#' @param a_centre_1 X-coordinate of the plot center (default: calculated from data)
-#' @param a_centre_2 Y-coordinate of the plot center (default: calculated from data)
+#' @param label.size Size of the labels (default is 5)
+#' @param line.thickness Line thickness of the annotation lines (default is 1)
+#' @param X_centre X-coordinate of the plot center (default: calculated from data)
+#' @param Y_centre Y-coordinate of the plot center (default: calculated from data)
 #' @param default_ext Default extension factor for all clusters (default: 2)
 #' @param per_exts Named numeric vector of extension factors per cluster (default: default_ext (NULL))
 #' @param text_offset Default text offset from label positions (default: 0.5)
@@ -77,7 +79,7 @@
 
 utils::globalVariables(c("median", "center_umap_1", "center_umap_2", "label_umap_1", "label_umap_2", "text_umap_1", "text_umap_2"))
 
-aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
+aMAP <- function(seurat_object, label.size = 5, line.thickness = 1, X_centre = NULL, Y_centre = NULL,
                  default_ext = NULL, per_exts = NULL, text_offset = NULL,
                  per_text_offsets = NULL, ...){
 
@@ -110,12 +112,12 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
   names(centroids)[2:3] <- c("center_umap_1", "center_umap_2")
 
   # Calculate the overall center of all points
-  if(is.null(a_centre_1) | is.null(a_centre_2)){
+  if(is.null(X_centre) | is.null(Y_centre)){
     overall_center <- colMeans(umap_data[, c("umap_1", "umap_2")])
-    print(paste0("a_centre_1 & a_centre_2 not specified, using calculated centre at ",
+    print(paste0("X_centre & Y_centre not specified, using calculated centre at ",
                  paste0(overall_center[1], ", ", overall_center[2])))
   } else {
-    overall_center <- c(umap_1 = a_centre_1, umap_2 = a_centre_2)
+    overall_center <- c(umap_1 = X_centre, umap_2 = Y_centre)
   }
 
   # Calculate direction vectors from overall center to each centroid
@@ -178,10 +180,10 @@ aMAP <- function(seurat_object, a_centre_1 = NULL, a_centre_2 = NULL,
     geom_segment(data = centroids,
                  aes(x = center_umap_1, y = center_umap_2,
                      xend = label_umap_1, yend = label_umap_2),
-                 color = "black", size = 1) +
+                 color = "black", size = line.thickness) +
     geom_text(data = centroids,
               aes(x = text_umap_1, y = text_umap_2, label = !!sym(group_name)),
-              color = "black", size = 5.5, fontface = 1)
+              color = "black", size = label.size, fontface = 1)
 
   return(p)
 }

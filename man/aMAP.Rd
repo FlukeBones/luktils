@@ -6,9 +6,13 @@
 \arguments{
 \item{seurat_object}{A Seurat object containing UMAP reduction (Seurat::RunUMAP() must have already been run)}
 
-\item{a_centre_1}{X-coordinate of the plot center (default: calculated from data)}
+\item{label.size}{Size of the labels (default is 5)}
 
-\item{a_centre_2}{Y-coordinate of the plot center (default: calculated from data)}
+\item{line.thickness}{Line thickness of the annotation lines (default is 1)}
+
+\item{X_centre}{X-coordinate of the plot center (default: calculated from data)}
+
+\item{Y_centre}{Y-coordinate of the plot center (default: calculated from data)}
 
 \item{default_ext}{Default extension factor for all clusters (default: 2)}
 
